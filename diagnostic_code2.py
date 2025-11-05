@@ -53,3 +53,25 @@ if empty_providers:
 if small_providers:
     print("  Consider filtering providers with only 1 code (optional)")
 print("="*80)
+
+
+
+def attention_head(self, provider_emb, code_embs, W, a):
+    provider_h = W(provider_emb)
+    code_h = W(code_embs)
+    
+    n_codes = code_embs.shape[0]
+    provider_repeated = provider_h.repeat(n_codes, 1)
+    
+    concat = torch.cat([provider_repeated, code_h], dim=1)
+    e = self.leaky_relu(concat @ a).squeeze(-1)  # CHANGE: squeeze only last dim
+    
+    # CHANGE: Handle single code case
+    if e.dim() == 0:
+        e = e.unsqueeze(0)
+    
+    alpha = F.softmax(e, dim=0)
+    alpha = self.dropout(alpha)
+    
+    aggregated = (alpha.unsqueeze(1) * code_h).sum(dim=0)
+    return aggregated
