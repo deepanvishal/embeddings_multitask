@@ -75,3 +75,15 @@ def attention_head(self, provider_emb, code_embs, W, a):
     
     aggregated = (alpha.unsqueeze(1) * code_h).sum(dim=0)
     return aggregated
+
+
+
+
+# OLD (fails):
+final_embeddings[provider_idx] = provider_init_embeddings[provider_idx, :512]
+# Tries to slice 128D array with [:512] → error
+
+# NEW (works):
+final_embeddings[provider_idx, :CODE_EMBEDDING_DIM] = provider_init_embeddings[provider_idx]
+# Copies 128D into first 128 positions of 512D array
+# Remaining 384 positions stay as 0
