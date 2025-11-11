@@ -1,0 +1,18 @@
+1. Herfindahl Index (H)
+Formula: H = Σ(share²) where share = provider's claims / total claims for code
+Addresses: Market concentration - how monopolized is this service?
+
+2. Provider Scarcity (S)
+Formula: S = 1 - (n/N) where n = providers offering code, N = total providers
+Addresses: Provider availability - how few providers offer this service?
+
+3. Inverse Prevalence (P)
+Formula: P = 1 - (percentile/100) where percentile = code's volume rank
+Addresses: Volume rarity - how uncommon is this service by volume?
+
+Composite Rarity Score
+Formula: Rarity = (H × S × P)^(1/3) (geometric mean)
+
+Example: Lung Transplant
+MetricCalculationValueHProvider A: 45/50 claims, Provider B: 5/50 claims<br>H = (0.9)² + (0.1)² = 0.820.82S2 providers out of 1000 total<br>S = 1 - (2/1000) = 0.9980.998P50 claims puts it at 5th percentile<br>P = 1 - (5/100) = 0.950.95Rarity(0.82 × 0.998 × 0.95)^(1/3)0.917 ✓
+Result: Rarity score = 0.917 → RARE SERVICE (threshold ≥ 0.70)Retry
