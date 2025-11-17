@@ -1,0 +1,58 @@
+Slide 1 — Purpose, Scale & Scope
+Title:
+Provider Utilization Embeddings: Foundational Representation for Network Analytics
+Bullets (Crisp, Non-Rambling)
+
+We built a provider-level utilization embedding that summarizes each provider’s procedure mix, diagnosis mix, cost patterns, place of service, and patient volume into a compact vector representation.
+
+This embedding serves as a foundational, reusable asset for any downstream modeling or analytics — including ProNet 2.0, provider substitution, network simulation, and utilization pattern analysis.
+
+Data Window: Claims from 2023–2024.
+
+Initial Cohort: ~60,000 provider entities.
+
+Focus: Hospitals and facilities only (specialists excluded in this phase).
+
+Stability Filters Applied:
+
+≥ 156 total claims
+
+≥ 10 distinct treatment codes
+
+≥ 8 distinct diagnosis codes
+
+Filters chosen based on empirical distribution breakpoints to ensure stable utilization signals.
+
+Final Modeling Cohort: 25,347 providers that meet minimum utilization diversity and volume thresholds.
+
+The goal at this stage is not to tie the embeddings to an immediate metric, but to deliver a consistent, scalable provider representation that other teams can use directly.
+
+
+SLIDE 1: OVERVIEW
+Overview
+Representing providers based on their utilization patterns is complicated due to high dimensionality from thousands of procedure and diagnosis codes, resulting in extremely sparse data. We're creating embeddings to solve this challenge.
+Scope
+
+Data Source: 2023-2024 claims data
+Provider Type: Hospitals and facilities only (no specialists)
+Initial Pool: 60,000+ providers in claims
+Final Cohort: 25,347 providers after filtering
+Filtering Criteria:
+
+Minimum 156 claims per provider
+At least 10 unique procedure codes
+At least 8 unique diagnosis codes
+
+
+
+Solution: ME2Vec (Medical Entity to Vector)
+
+Graph-based embeddings that capture provider utilization patterns
+Converts sparse procedure/diagnosis codes into dense vector representations
+Enables efficient similarity calculations between providers
+
+Output
+
+Dense embeddings for each provider
+Any team can use for their analytics needs
+First application: ProNet 2.0 network simulation
