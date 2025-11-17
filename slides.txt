@@ -56,3 +56,66 @@ Output
 Dense embeddings for each provider
 Any team can use for their analytics needs
 First application: ProNet 2.0 network simulation
+
+
+
+SLIDE 2: ME2VEC ARCHITECTURE
+Three-Step Embedding Pipeline
+Step 1: Procedure Code Embeddings (Node2Vec)
+
+Build co-occurrence graph between procedure codes (codes that appear together for same providers)
+Generate biased random walks on the procedure graph
+Train Word2Vec on walks to create 128-dim procedure embeddings
+Parameters: 80-length walks, 10 walks per node, p=4.0, q=1.0
+
+Step 2: Initialize Provider Embeddings
+
+Weighted average of procedure code embeddings
+Weight = claim frequency for each procedure
+Creates initial 128-dim provider representation
+
+Step 3: GAT Refinement for Final Embeddings
+
+Multi-head Graph Attention Network (4 heads)
+Learns which procedure codes are most important for each provider
+Attention mechanism weights the importance of different procedures
+Outputs: 512-dim refined provider embeddings (128 dim × 4 heads)
+Trained using specialty labels as supervision signal
+
+
+Conceptual Flow (Crisp + Accurate)
+
+1. Utilization Patterns as Inputs
+We begin by summarizing each provider’s utilization across procedures and diagnoses.
+These patterns create a behavioral “fingerprint” of how each facility is used.
+
+2. ME2Vec Embeddings
+Using a co-occurrence–based neural model (similar to Word2Vec), we learn:
+
+Procedure embeddings (how procedures relate to one another)
+
+Diagnosis embeddings (how diagnoses relate based on patterns of co-treatment)
+Providers receive an initial vector by aggregating the embeddings of the codes they perform most.
+
+3. Specialty-Aware Refinement (Attention Layer)
+A Graph Attention layer adjusts each provider’s embedding by highlighting the most representative procedure/diagnosis patterns.
+Specialty labels (where available) help the model organize providers into clinically meaningful patterns.
+
+4. Multi-Tower Provider Representation
+In addition to ME2Vec embeddings, we incorporate structured provider features (“towers”):
+
+Cost categories
+
+Place of service
+
+Demographics
+
+Provider size/volume metrics
+All towers are standardized and concatenated with the ME2Vec embeddings.
+
+5. Final Representation (1,046 dimensions)
+The output is a unified embedding that captures a provider’s overall utilization behavior — ready for similarity modeling and downstream simulation.
+
+Visual Summary (for your slide layout)
+
+Utilization → ME2Vec (proc + diag) → Attention refinement → Add towers → Final provider vector
