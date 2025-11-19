@@ -119,3 +119,26 @@ The output is a unified embedding that captures a provider’s overall utilizati
 Visual Summary (for your slide layout)
 
 Utilization → ME2Vec (proc + diag) → Attention refinement → Add towers → Final provider vector
+
+Hi Danielle,
+
+I’ve put together a deck summarizing the Embeddings Model, and I’ve attached the PowerPoint for your review.
+
+The deck includes:
+
+Overview
+
+Model Architecture
+
+Threshold methodology with sample results
+
+Alternative methods considered
+
+Rare/Unique services and proposed next steps
+
+I’ve also included additional technical details in the appendix for reference.
+
+Please let me know if the narrative flow works or if you’d like any adjustments.
+
+Thanks,
+Deepan
