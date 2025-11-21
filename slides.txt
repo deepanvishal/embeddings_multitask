@@ -142,3 +142,15 @@ Please let me know if the narrative flow works or if you’d like any adjustment
 
 Thanks,
 Deepan
+
+
+Substance Abuse Curation:
+Measured the extent of adverse selection in curated vs. non-curated scenarios and quantified how much risk was avoided because of the curation strategy.
+
+Redistribution Model:
+Developed the initial logistic-regression model to estimate redistribution likelihood and then evolved it into an embeddings-based framework for better scalability and pattern capture.
+
+Provider Embeddings:
+Built an embeddings model using utilization and demographic data; the work is in progress, with multiple rounds of feedback incorporated and alignment secured from technical SMEs.
+
+I actively discussed and reviewed development actions with my leader to strengthen my performance and align with the expectations of my new role, focusing on building consistency, clarity, and scale in my work.
