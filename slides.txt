@@ -154,3 +154,16 @@ Provider Embeddings:
 Built an embeddings model using utilization and demographic data; the work is in progress, with multiple rounds of feedback incorporated and alignment secured from technical SMEs.
 
 I actively discussed and reviewed development actions with my leader to strengthen my performance and align with the expectations of my new role, focusing on building consistency, clarity, and scale in my work.
+
+
+
+# OLD (could create 0-d array):
+a_attention = np.array(a_data['attention']) if a_data['attention'] else np.array([])
+if len(a_codes) > 0 and len(a_attention) > 0:  # ← Error here if 0-d array
+
+# NEW (safe):
+a_attention_list = a_data['attention'] if a_data['attention'] else []
+a_attention = np.array(a_attention_list) if a_attention_list else np.array([])
+if len(a_codes) > 0 and len(a_attention_list) > 0:  # ← Check list, not numpy array
+
+
